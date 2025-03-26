@@ -104,20 +104,10 @@ def get_download_link(df, filename, text):
 
 
 def add_favicon():
-    """Embeds a favicon using a local file path (workaround for Streamlit)."""
-    favicon_path = "./pngtree-green-shield-icon-for-web-design-isolated-on-white-background-png-image_4839869.png"
+    """Embeds a favicon using an online image URL."""
+    favicon_url = "https://raw.githubusercontent.com/PatheticUser/Spam-Classifier/main/pngtree-green-shield-icon-for-web-design-isolated-on-white-background-png-image_4839869.png"
 
-    # Convert the local image to a base64 format
-    import base64
-
-    with open(favicon_path, "rb") as f:
-        data = f.read()
-        encoded = base64.b64encode(data).decode()
-
-    # Create a favicon HTML tag using base64-encoded image
-    favicon_html = (
-        f'<link rel="icon" type="image/png" href="data:image/png;base64,{encoded}">'
-    )
+    favicon_html = f'<link rel="icon" href="{favicon_url}" type="image/png">'
 
     # Inject into Streamlit app
     st.markdown(favicon_html, unsafe_allow_html=True)
