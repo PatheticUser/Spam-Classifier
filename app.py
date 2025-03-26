@@ -224,11 +224,7 @@ def main():
                 prediction, probability = model_manager.predict(input_sms)
 
                 result_class = "spam-result" if prediction == 1 else "not-spam-result"
-                result_text = (
-                    f"SPAM DETECTED! (Probability: {probability:.2%})"
-                    if prediction == 1
-                    else f"NOT SPAM (Confidence: {1-probability:.2%})"
-                )
+                result_text = f"SPAM DETECTED!" if prediction == 1 else f"NOT SPAM"
 
                 st.markdown(
                     f"""
