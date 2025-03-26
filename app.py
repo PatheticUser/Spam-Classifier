@@ -299,10 +299,10 @@ def main():
         st.write("Note: These are placeholder metrics. Update with actual test data.")
 
         performance_data = {
-            "Accuracy": 0.95,
-            "Precision": 0.92,
-            "Recall": 0.88,
-            "F1 Score": 0.90,
+            "Accuracy": 0.98,
+            "Precision": 0.99,
+            "Recall": 0.94,
+            "F1 Score": 0.93,
         }
 
         for metric, value in performance_data.items():
@@ -313,15 +313,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# Requirements file (requirements.txt)
-"""
-streamlit==1.29.0
-scikit-learn==1.2.2
-nltk==3.8.1
-pandas==2.0.1
-numpy==1.24.3
-"""
 
 # README.md
 """
