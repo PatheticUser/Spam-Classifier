@@ -108,7 +108,7 @@ def configure_app():
     """Sets up the Streamlit app with a custom favicon."""
     st.set_page_config(
         page_title="Spam Shield",
-        page_icon="https://www.canva.com/design/DAGi07roAXs/0QKvBVuLJVN3UQvwTRcCOw/edit?utm_content=DAGi07roAXs&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton",
+        page_icon="https://imgur.com/a/KoSTpWY",
         layout="wide",
     )
 
