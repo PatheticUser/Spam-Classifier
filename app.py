@@ -105,10 +105,9 @@ def get_download_link(df, filename, text):
 
 # Streamlit App Configuration
 def configure_app():
-    """Sets up the Streamlit app with a custom favicon."""
     st.set_page_config(
         page_title="Spam Shield",
-        page_icon="https://imgur.com/a/KoSTpWY",
+        page_icon="https://i.imgur.com/zfC5U6t.png",
         layout="wide",
     )
 
