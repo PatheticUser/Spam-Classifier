@@ -303,9 +303,6 @@ if __name__ == "__main__":
 """
 # Spam Shield
 
-## Overview
-Spam Shield is an intelligent message classification application using machine learning.
-
 ## Setup
 1. Clone the repository
 2. Install dependencies: `pip install -r requirements.txt`
