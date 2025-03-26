@@ -4,8 +4,6 @@ Here's an interesting `README.md` for your spam classifier:
 
 # 📧 Spam Shield: AI-Powered Spam Classifier 🚀
 
-![Spam Shield](https://png.pngtree.com/png-vector/20220609/ourmid/pngtree-green-shield-icon-for-web-design-isolated-on-white-background-png-image_4839869.png)
-
 Spam Shield is a **machine learning-powered spam detector** built with **Streamlit**, **NLTK**, and **Scikit-Learn**. It efficiently classifies messages as **spam or not spam** using **natural language processing (NLP) techniques** and a **trained classifier**.
 
 ## 🔥 Features
@@ -75,18 +73,6 @@ streamlit run app.py
 | Precision | 99%   |
 | Recall    | 94%   |
 | F1 Score  | 93%   |
-
-_(Update these with actual test results from your model.)_
-
----
-
-## 🎯 Screenshots
-
-🔹 **Spam Detection in Action**  
-![Spam Detection](Images/1.jpg)
-
-🔹 **Bulk Message Analysis**  
-![Bulk Analysis](Images/2.jpg)
 
 ---
 
