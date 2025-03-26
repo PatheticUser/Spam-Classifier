@@ -103,21 +103,12 @@ def get_download_link(df, filename, text):
     return f'<a href="data:file/csv;base64,{b64}" download="{filename}">{text}</a>'
 
 
-def add_favicon():
-    """Embeds a favicon using an online image URL."""
-    favicon_url = "https://raw.githubusercontent.com/PatheticUser/Spam-Classifier/main/pngtree-green-shield-icon-for-web-design-isolated-on-white-background-png-image_4839869.png"
-
-    favicon_html = f'<link rel="icon" href="{favicon_url}" type="image/png">'
-
-    # Inject into Streamlit app
-    st.markdown(favicon_html, unsafe_allow_html=True)
-
-
 # Streamlit App Configuration
 def configure_app():
+    """Sets up the Streamlit app with a custom favicon."""
     st.set_page_config(
         page_title="Spam Shield",
-        page_icon="https://raw.githubusercontent.com/PatheticUser/Spam-Classifier/main/pngtree-green-shield-icon-for-web-design-isolated-on-white-background-png-image_4839869.png",
+        page_icon="https://png.pngtree.com/png-vector/20220609/ourmid/pngtree-green-shield-icon-for-web-design-isolated-on-white-background-png-image_4839869.png",
         layout="wide",
     )
 
@@ -194,7 +185,6 @@ def configure_app():
 def main():
     # App Configuration
     configure_app()
-    add_favicon()
 
     # Model Initialization
     model_manager = SpamClassificationModel(
