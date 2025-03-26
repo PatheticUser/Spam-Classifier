@@ -198,9 +198,6 @@ def main():
     # Model Loading
     model_loaded, error_msg = model_manager.load_model()
 
-    # Main Container
-    st.markdown('<div class="main-container">', unsafe_allow_html=True)
-
     # Title
     st.markdown("<h1 class='title'>Spam Shield</h1>", unsafe_allow_html=True)
 
