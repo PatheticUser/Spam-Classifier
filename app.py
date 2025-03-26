@@ -103,12 +103,13 @@ def get_download_link(df, filename, text):
     return f'<a href="data:file/csv;base64,{b64}" download="{filename}">{text}</a>'
 
 
-# Favicon embedding
 def add_favicon():
-    favicon = """
-    <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAABg0lEQVQ4jYWSv0sCYRTGz93b3d0lhNAhKEIICcGhwSFolYhCp1bDH5BEtPU1tBRCi0NDgSRSBA0NDU0NzUFEUARBUFBQoN/3DvW93M695zzvfZ7zHkIphf8h6sEG33OUFMdxRGcymUxVVWPf9/d4vV7vDJ2maQzDEMdxNC9JUgCg+YN8GIZdiqIsnAKapjWMMAwDWZYFSZIEAOVyGZVKBYqiNI7rup6iKAJN04CmaUDTNKBpWvAqiqKDv1KpIB6PM5ZlvYqiyKiqirF7kYymaYjH4/B9P5g2DMOapulgs9lAVdVAKYVhGCCKIkRRBCEEQgi2bQMhBEIIuq4DXdeB47ggSRKEYQjDMABFUYCqqsD3fRBFEaIoAsMwgGVZwLIs4DiOE0VR2mg0Gv4PsixDPp8HnudBkiQQBAGCIADf90EQBNA0DWRZBL7vg6Zp4LouMAxz/F6tVvM1TUMul/sChUJhJ4RsBPG2ZVnCKIqCJEmtKIqCTCYDhmHs/8fD04dCoYA6h4aG/wd/AbTIyMgbLfJsAAAAAElFTkSuQmCC">
-    """
-    st.markdown(favicon, unsafe_allow_html=True)
+    """Embeds a favicon using a local file path."""
+    favicon_path = "./pngtree-green-shield-icon-for-web-design-isolated-on-white-background-png-image_4839869.png"  # Define the favicon path inside the function
+    favicon_html = f'<link rel="icon" href="{favicon_path}" type="image/x-icon">'
+
+    # Inject into Streamlit app
+    st.markdown(favicon_html, unsafe_allow_html=True)
 
 
 # Streamlit App Configuration
