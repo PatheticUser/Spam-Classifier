@@ -115,7 +115,11 @@ def add_favicon():
 
 # Streamlit App Configuration
 def configure_app():
-    st.set_page_config(page_title="Spam Shield", page_icon=":detective:", layout="wide")
+    st.set_page_config(
+        page_title="Spam Shield",
+        page_icon="https://raw.githubusercontent.com/PatheticUser/Spam-Classifier/main/pngtree-green-shield-icon-for-web-design-isolated-on-white-background-png-image_4839869.png",
+        layout="wide",
+    )
 
     # Custom CSS
     st.markdown(
@@ -323,8 +327,4 @@ Spam Shield is an intelligent message classification application using machine l
 - Bulk message analysis
 - Model performance insights
 
-## Model Training
-Train your model using sklearn and save vectorizer/model as:
-- vectorizer1.pkl
-- model1.pkl
 """
