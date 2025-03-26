@@ -301,8 +301,6 @@ if __name__ == "__main__":
 
 # README.md
 """
-# Spam Shield
-
 ## Setup
 1. Clone the repository
 2. Install dependencies: `pip install -r requirements.txt`
