@@ -104,9 +104,20 @@ def get_download_link(df, filename, text):
 
 
 def add_favicon():
-    """Embeds a favicon using a local file path."""
-    favicon_path = "./pngtree-green-shield-icon-for-web-design-isolated-on-white-background-png-image_4839869.png"  # Define the favicon path inside the function
-    favicon_html = f'<link rel="icon" href="{favicon_path}" type="image/x-icon">'
+    """Embeds a favicon using a local file path (workaround for Streamlit)."""
+    favicon_path = "./pngtree-green-shield-icon-for-web-design-isolated-on-white-background-png-image_4839869.png"
+
+    # Convert the local image to a base64 format
+    import base64
+
+    with open(favicon_path, "rb") as f:
+        data = f.read()
+        encoded = base64.b64encode(data).decode()
+
+    # Create a favicon HTML tag using base64-encoded image
+    favicon_html = (
+        f'<link rel="icon" type="image/png" href="data:image/png;base64,{encoded}">'
+    )
 
     # Inject into Streamlit app
     st.markdown(favicon_html, unsafe_allow_html=True)
@@ -222,14 +233,6 @@ def main():
 
         with col1:
             predict_clicked = st.button("Analyze Message", type="primary")
-
-        with col2:
-            clear_clicked = st.button("Clear")
-
-        # Handle Clear Button
-        if clear_clicked:
-            st.session_state.single_message = ""
-            st.experimental_rerun()
 
         # Prediction Logic
         if predict_clicked and input_sms.strip():
