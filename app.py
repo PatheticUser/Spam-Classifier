@@ -5,7 +5,7 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 
-# Download NLTK resources (if not already present)
+# Download NLTK resources safely
 try:
     nltk.data.find("tokenizers/punkt")
 except LookupError:
@@ -20,21 +20,10 @@ ps = PorterStemmer()
 
 
 def transform_text(text):
-    """
-    Preprocess text by:
-    1. Converting to lowercase
-    2. Tokenizing
-    3. Removing non-alphanumeric characters
-    4. Removing stopwords and punctuation
-    5. Applying stemming
-    """
-    # Lowercase conversion
+    """Preprocess text by cleaning and standardizing"""
     text = text.lower()
-
-    # Tokenization
     tokens = nltk.word_tokenize(text)
 
-    # Remove non-alphanumeric and filter out stopwords/punctuation
     cleaned_tokens = [
         ps.stem(token)
         for token in tokens
@@ -47,51 +36,55 @@ def transform_text(text):
 
 
 # Page Configuration
-st.set_page_config(page_title="Spam Shield", page_icon=":shield:", layout="centered")
+st.set_page_config(page_title="Spam Classifier", page_icon=":detective:", layout="wide")
 
-# Custom CSS for modern, clean design
+# Custom CSS with high contrast and clear visibility
 st.markdown(
     """
     <style>
     .stApp {
-        background-color: #f4f6f9;
-        font-family: 'Inter', sans-serif;
+        background-color: #ffffff;
+        color: #000000;
+        font-family: Arial, sans-serif;
     }
     .main-container {
-        background-color: white;
-        border-radius: 12px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        padding: 30px;
-        max-width: 600px;
+        background-color: #f0f0f0;
+        border-radius: 10px;
+        padding: 20px;
+        max-width: 800px;
         margin: 20px auto;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
     .stTextArea textarea {
-        border-radius: 8px;
-        border: 1.5px solid #e0e4e8;
-        background-color: #f9fafb;
-        padding: 12px;
+        background-color: white;
+        color: black;
+        border: 2px solid #333;
+        border-radius: 5px;
         font-size: 16px;
+        min-height: 200px;
     }
     .stButton > button {
-        background-color: #3b82f6;
+        background-color: #007bff;
         color: white;
-        border-radius: 8px;
-        font-weight: 600;
-        transition: all 0.3s ease;
+        border-radius: 5px;
+        font-weight: bold;
     }
-    .stButton > button:hover {
-        background-color: #2563eb;
-        transform: translateY(-2px);
+    .result-box {
+        padding: 15px;
+        border-radius: 5px;
+        margin-top: 15px;
+        font-size: 18px;
+        text-align: center;
     }
     .spam-result {
-        background-color: #fee2e2;
-        color: #7f1d1d;
-        border-left: 4px solid #ef4444;
+        background-color: #ffdddd;
+        border: 2px solid #ff0000;
+        color: #ff0000;
     }
     .not-spam-result {
-        background-color: #d1fae5;
-        color: #064e3b;
-        border-left: 4px solid #10b981;
+        background-color: #ddffdd;
+        border: 2px solid #00aa00;
+        color: #00aa00;
     }
     </style>
 """,
@@ -99,7 +92,7 @@ st.markdown(
 )
 
 
-# Load pre-trained model and vectorizer
+# Cached model loading
 @st.cache_resource
 def load_model():
     try:
@@ -107,17 +100,12 @@ def load_model():
         model = pickle.load(open("model1.pkl", "rb"))
         return tfidf, model
     except FileNotFoundError:
-        st.error(
-            "Model files not found. Please ensure vectorizer1.pkl and model1.pkl exist."
-        )
+        st.error("Model files not found. Please check your files.")
         return None, None
 
 
-# Main App
 def main():
-    st.markdown('<div class="main-container">', unsafe_allow_html=True)
-    st.title("Spam Shield")
-    st.markdown("*Intelligent Message Classification*")
+    st.title("SMS/Email Spam Classifier")
 
     # Load model
     tfidf, model = load_model()
@@ -125,47 +113,35 @@ def main():
     if tfidf and model:
         # Message input
         input_sms = st.text_area(
-            "Paste your message here",
-            height=200,
-            placeholder="Enter SMS or email content to check for spam...",
+            "Enter your message:",
+            placeholder="Type or paste your SMS/Email here...",
+            height=250,
         )
 
-        col1, col2 = st.columns(2)
+        # Prediction Button
+        if st.button("Check for Spam", type="primary"):
+            if input_sms.strip():
+                with st.spinner("Analyzing message..."):
+                    # Preprocess and predict
+                    transformed_sms = transform_text(input_sms)
+                    vector_input = tfidf.transform([transformed_sms])
+                    result = model.predict(vector_input)[0]
 
-        with col1:
-            # Predict Button
-            if st.button("Analyze Message", type="primary"):
-                if input_sms.strip():
-                    with st.spinner("Processing..."):
-                        # Preprocess and predict
-                        transformed_sms = transform_text(input_sms)
-                        vector_input = tfidf.transform([transformed_sms])
-                        result = model.predict(vector_input)[0]
-
-                        # Result display
-                        if result == 1:
-                            st.markdown(
-                                '<div class="spam-result" style="padding: 15px; border-radius: 8px;">'
-                                "<strong>Spam Detected!</strong><br>"
-                                "This message appears to be spam.</div>",
-                                unsafe_allow_html=True,
-                            )
-                        else:
-                            st.markdown(
-                                '<div class="not-spam-result" style="padding: 15px; border-radius: 8px;">'
-                                "<strong>Safe Message</strong><br>"
-                                "This message looks legitimate.</div>",
-                                unsafe_allow_html=True,
-                            )
-                else:
-                    st.warning("Please enter a message to analyze.")
-
-        with col2:
-            # Clear Button
-            if st.button("Clear Message"):
-                input_sms = ""
-
-    st.markdown("</div>", unsafe_allow_html=True)
+                    # Result Display
+                    if result == 1:
+                        st.markdown(
+                            '<div class="result-box spam-result">'
+                            "SPAM DETECTED! This message appears to be spam.</div>",
+                            unsafe_allow_html=True,
+                        )
+                    else:
+                        st.markdown(
+                            '<div class="result-box not-spam-result">'
+                            "NOT SPAM. This message seems legitimate.</div>",
+                            unsafe_allow_html=True,
+                        )
+            else:
+                st.warning("Please enter a message to analyze.")
 
 
 if __name__ == "__main__":
