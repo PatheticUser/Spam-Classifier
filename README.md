@@ -1,7 +1,3 @@
-Here's an interesting `README.md` for your spam classifier:
-
----
-
 # 📧 Spam Shield: AI-Powered Spam Classifier 🚀
 
 Spam Shield is a **machine learning-powered spam detector** built with **Streamlit**, **NLTK**, and **Scikit-Learn**. It efficiently classifies messages as **spam or not spam** using **natural language processing (NLP) techniques** and a **trained classifier**.
@@ -96,5 +92,3 @@ We welcome contributions! If you have ideas for improvements or want to add feat
 This project is open-source under the **MIT License**.
 
 ---
-
-🚀 **Detect spam like a pro! Protect your inbox with Spam Shield!** 🛡️
