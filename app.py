@@ -281,8 +281,6 @@ def main():
         performance_data = {
             "Accuracy": 0.98,
             "Precision": 0.99,
-            "Recall": 0.94,
-            "F1 Score": 0.93,
         }
 
         for metric, value in performance_data.items():
