@@ -788,7 +788,7 @@ def main():
         """
         <div class="footer">
             <p>Spam Shield - Advanced AI-powered spam detection system</p>
-            <p>© 2023 All Rights Reserved</p>
+            <p>© 2025 All Rights Reserved</p>
         </div>
         """,
         unsafe_allow_html=True,
