@@ -11,14 +11,8 @@ from nltk.stem.porter import PorterStemmer
 from typing import Tuple, Optional
 
 # NLTK Resource Management
-try:
-    nltk.data.find("tokenizers/punkt")
-except LookupError:
-    nltk.download("punkt", quiet=True)
-try:
-    nltk.data.find("corpora/stopwords")
-except LookupError:
-    nltk.download("stopwords", quiet=True)
+nltk.download("punkt", force=True, quiet=True)
+nltk.download("stopwords", force=True, quiet=True)
 
 
 # Preprocessing Utility
